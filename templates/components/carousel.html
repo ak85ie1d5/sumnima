@@ -1,0 +1,63 @@
+<div class="CarouselHome swiper-home">
+    <div class="swiper-wrapper">
+        {{#if theme_settings.homepage_show_carousel_video}}
+        <div class="swiper-slide video-slider" data-swiper-autoplay="{{theme_settings.carousel_video_time }}000" style="background-image: url('/images/stencil/original/image-manager/{{theme_settings.carousel_video_poster}}');">
+            <div class="heroCarousel-content video-content">
+            </div>
+            
+            <a href="#" aria-label="Slide number 0"  class="video-slider-wrapper"><iframe frameborder="0" src="https://player.vimeo.com/video/{{theme_settings.carousel_video_id }}?autopause=0&amp;autoplay=1&amp;background=1&amp;byline=0&amp;controls=0&amp;loop=1&amp;muted=1&amp;playsinline=1&amp;title=0&amp;transparent=1" class="js-vimeo" allow="autoplay; encrypted-media" allowfullscreen="" title="Explore our
+            collections"></iframe></a>
+            <img src="/images/stencil/original/image-manager/{{theme_settings.carousel_video_poster}}" alt="{{theme_settings.carousel_video_poster}}">
+        </div>
+        {{/if}}
+        {{#each carousel.slides}}
+        {{#if button_text}}
+        
+        {{else}}
+             <div class="swiper-slide" data-swiper-autoplay="5000"> <a href="{{url}}" data-hero-slide="{{@index}}" aria-label="{{#if this.alt_text.length '!=' 0}}{{this.alt_text}}{{else}}{{lang 'carousel.slide_number' slide_number=(add @index 1)}}{{/if}}"  class="carousel-image" style="background: url('{{getImageSrcset image use_default_sizes=true }}');">
+            {{/if}}
+         
+                {{#if button_text}}
+                <div class="swiper-slide" data-swiper-autoplay="5000"> <a href="{{url}}"  aria-label="{{#if this.alt_text.length '!=' 0}}{{this.alt_text}}{{else}}{{lang 'carousel.slide_number' slide_number=(add @index 1)}}{{/if}}"  class="carousel-image" style="background: url('{{getImageSrcset image use_default_sizes=true }}');">
+                    {{else}}
+                    {{/if}}
+                    {{#if @first}}
+                    {{> components/common/responsive-img
+                    image=stencil_image
+                    class="heroCarousel-image"
+                    fallback_size='1280w'
+                    lazyload='disabled'
+                    }}
+                    {{else}}
+                    {{> components/common/responsive-img
+                    image=stencil_image
+                    class="heroCarousel-image"
+                    fallback_size='1280w'
+                    lazyload='lazyload'
+                    }}
+                    {{/if}}
+                    {{#if button_text}}
+              
+                {{else}}
+                {{/if}}
+                {{#or heading text button_text}}
+                {{> components/carousel-content}}
+                {{/or}}
+                
+                {{#if button_text}}
+                 </a></div>
+            {{else}}
+        </a></div>
+        {{/if}}
+        {{/each}}
+        {{#if carousel.slides.length '>' 1}}
+        {{> components/carousel-content-announcement}}
+        {{#if play_pause_button}}
+        {{> components/carousel-play-pause-button}}
+        {{/if}}
+        {{/if}}
+
+</div> 
+    <div class="swiper-pagination"></div>
+    {{#if theme_settings.homepage_show_carousel_arrows }}<div class="swiper-button-next"></div><div class="swiper-button-prev"></div>{{/if}}
+</div>

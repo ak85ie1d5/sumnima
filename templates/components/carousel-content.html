@@ -1,0 +1,11 @@
+<div class="heroCarousel-content{{#and (if heading '==' false) (if text '==' false)}} heroCarousel-content--empty{{/and}}">
+    {{#if heading}}
+        <p class="heroCarousel-title" aria-label="{{{heading}}}"><span>{{{heading}}}</span></p>
+    {{/if}}
+    {{#if text}}
+        <p class="heroCarousel-description"  aria-label="{{{text}}}"><span>{{{text}}}</span></p>
+    {{/if}}
+    {{#if button_text}}
+      <p class="heroCarousel-action-wrapper">  <a href="{{url}}" aria-label="{{#if this.alt_text.length '!=' 0}}{{this.alt_text}}{{else}}{{lang 'carousel.slide_number' slide_number=(add @index 1)}}{{/if}}, {{button_text}}" class="heroCarousel-action button button--primary button--large"><span>{{{button_text}}}</span></a></p>
+    {{/if}}
+</div>

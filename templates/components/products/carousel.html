@@ -1,0 +1,34 @@
+{{#if theme_settings.product_grid_slider '===' 'productSlider'}}
+<section class="swiper {{#if theme_settings.product_swiper_style '===' 'productSwiper'}}productSwiper{{else}}productSwiperBig{{/if}} {{list}}" 
+     data-list-name="{{list}}">        
+        <div class="swiper-wrapper" >
+        {{#each products}}
+          <div  data-product-slide  class="swiper-slide product-card">
+            {{> components/products/card settings=../settings theme_settings=../theme_settings customer=../customer event="list" position=(add @index 1)}}
+        </div>
+        {{/each}}
+        {{#if products.length '>' 1}}
+            {{> components/carousel-content-announcement}}
+        {{/if}}
+        </div>      
+    <div class="swiper-scrollbar"></div>
+</section>
+{{/if}}
+{{#if theme_settings.product_grid_slider '===' 'productGrid'}}
+ <div class="container">
+    <ul class="productGrid productGrid--maxCol12 {{list}}" 
+         data-list-name="{{list}}">         
+            {{#each products}}
+              <li  class="product">
+                {{> components/products/card settings=../settings theme_settings=../theme_settings customer=../customer event="list" position=(add @index 1)}}
+            </li>
+            {{/each}}
+            {{#if products.length '>' 1}}
+                {{> components/carousel-content-announcement}}
+            {{/if}}      
+    </ul>
+</div>
+{{/if}}
+
+
+ 

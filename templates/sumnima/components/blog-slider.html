@@ -1,0 +1,40 @@
+    <section class="blog-homepage">
+        <h2 class="page-heading">{{lang 'blog.recent_posts' }}</h2>
+            <div class="swiper blogSwiper" itemscope itemtype="http://schema.org/Blog">
+                <div class="swiper-wrapper">
+                    {{#each blog.recent_posts}}
+                    <div class="swiper-slide">
+                        <article
+                            itemprop="blogPosts"
+                            itemscope
+                            itemtype="http://schema.org/BlogPosting"
+                            >
+                            <figure>
+                                <a href="{{url}}" itemprop="url" title="{{title}}">
+                                    <img
+                                    src="{{getImage thumbnail 'blog_size'}}"
+                                    alt="{{title}}"
+                                    width="400"
+                                    height="400"
+                                    itemprop="image"
+                                    itemscope
+                                    itemtype="https://schema.org/ImageObject"
+                                    />
+
+                                </a>
+                            </figure>
+                            
+                            <div class="blog-description">
+                                <h3 title="{{title}}" itemprop="headline">
+                                <a href="{{url}}" itemprop="url">{{title}}</a>
+                                </h3>
+                                <p itemprop="description">{{summary}}&hellip; <a href="{{url}}" aria-label="{{post.title}} {{lang 'blog.read_more'}}">{{lang 'blog.read_more'}} - {{title}}</a>
+                            </p>
+                        </div>
+                    </article>
+                </div>
+                {{/each}}
+            </div>
+        <div class="swiper-scrollbar"></div>
+        </div>
+    </section>

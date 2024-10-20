@@ -1,0 +1,18 @@
+<div class="productView">
+{{#if product.related_products}}
+<div  id="tab-related" class="product-wrapper">
+        <h2>{{lang 'products.related_products'}}</h2>
+            {{> components/products/carousel products=product.related_products columns=6 list="Related Products"}}
+    </div>
+{{/if}}
+   {{{region name="product_tabs_one"}}}
+{{#if product.similar_by_views}}
+
+<div id="tab-similar"class="product-wrapper">
+            <h2>{{lang 'products.similar_by_views'}}</h2>
+        {{> components/products/carousel products=product.similar_by_views columns=6 list="Customers Also Viewed"}}
+    </div>
+{{/if}}
+
+</div>
+   {{{region name="product_tabs_two"}}}

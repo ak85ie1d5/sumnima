@@ -1,0 +1,28 @@
+<nav>
+    {{#if category.subcategories}}
+        <div class="sidebarBlock">
+            <h2 class="sidebarBlock-heading">{{category.name}}</h2>
+
+            <div class="swiper subcategories">
+ 
+                <div class="swiper-wrapper">
+                    {{#each category.subcategories}}
+                    <div class="swiper-slide">
+                        <a class="navList-action" href="{{url}}" aria-label="{{name}}">{{#if image}}<img src="{{getImage image "thumbnail"}}" alt="{{name}} image">{{/if}} 
+                            <span class="categry-name">{{name}}</span>
+                        </a>
+
+                    </div>
+                    {{/each}}
+                </div>
+ 
+            </div>
+        </div>
+    {{/if}}
+
+    {{#if category.faceted_search_enabled}}
+        {{> components/faceted-search/index category}}
+    {{else}}
+        {{> components/category/shop-by-price}}
+    {{/if}}
+</nav>

@@ -1,0 +1,25 @@
+{{#if product.description}}
+<div class="tab-description">
+    {{{product.description}}}
+    {{#all product.custom_fields theme_settings.show_custom_fields_tabs}}
+    <article class="beefup">
+        <h3 class="beefup__head">
+        {{sanitize theme_settings.pdp-custom-fields-tab-label}}
+        </h3>
+        <div class="beefup__body">
+            <dl class="productView-info additional-tab">
+                {{> components/products/custom-fields }}
+            </dl>
+        </div>
+    </article>
+    {{/all}}
+    {{#if product.warranty}}
+    <article class="beefup">
+        <h3 class="beefup__head"><button type="button" aria-expanded="false">Warranty Information</button></h3>
+        <div class="warranty-content beefup__body {{#unless product.description}}is-active{{/unless}}">
+            {{{product.warranty}}}
+        </div>
+    </article>
+    {{/if}}
+</div>
+{{/if}}

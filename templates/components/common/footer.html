@@ -1,0 +1,94 @@
+{{#if banners.bottom}}
+        <div class="banners" data-banner-location="bottom">
+            {{#each (limit banners.bottom_metadata 1)}}
+                <div class="banner" data-event-type="promotion" data-entity-id="{{this.id}}" data-name="{{this.banner-name}}" data-position="{{this.location}}" data-name="{{this.banner-name}}">
+                    <div data-event-type="promotion-click">
+                        {{{this.content}}}
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+{{/if}}
+<footer class="footer" role="contentinfo">
+    {{{region name="footer_top--global"}}}
+    <h2 class="footer-title-sr-only">{{lang 'footer.title'}}</h2>
+    <div class="container">
+        {{{region name="footer-top-icons--global"}}} 
+
+        {{#if theme_settings.social_icon_bottom}}
+            <article class="footer-info-col
+                footer-info-col--social
+                footer-info-col--center"
+                data-section-type="footer-webPages">
+                    <h3 class="footer-info-heading">{{lang 'social.connect'}}</h3>
+                    {{> components/common/social-links}}
+            </article>
+
+       {{/if}}
+
+        <section class="footer-info {{#if theme_settings.hide_footer_info }}hide-footer-info{{/if}} {{#if theme_settings.hide_footer_brands }}hide-footer-brands{{/if}}">
+            {{#if settings.address}}
+            <article class="footer-info-col footer-info-col--small" data-section-type="storeInfo">
+                <h3 class="footer-info-heading">{{lang 'footer.info'}}</h3>
+                <address>{{nl2br settings.address}}</address>
+                {{#if settings.phone_number}}
+                    <strong>{{lang 'footer.call_us' phone_number=settings.phone_number}}</strong>
+                {{/if}}
+            </article>
+            {{/if}}
+
+            <article class="footer-info-col footer-info-col--small" data-section-type="footer-webPages">
+                <h3 class="footer-info-heading">{{lang 'footer.navigate'}}</h3>
+                <ul class="footer-info-list">
+                    {{#each pages}}
+                        <li>
+                            <a href="{{url}}">{{name}}</a>
+                        </li>
+                    {{/each}}
+                    {{{region name="footer_info_navigate--global"}}}
+                    <li>
+                        <a href="{{urls.sitemap}}">{{lang 'sitemap.page_title'}}</a>
+                    </li>
+                </ul>
+            </article> 
+
+            {{#and theme_settings.shop_by_brand_show_footer shop_by_brand.length}}
+            <article class="footer-info-col footer-info-col--small" data-section-type="footer-brands">
+                <h3 class="footer-info-heading">{{lang 'footer.brands'}}</h3>
+                <ul class="footer-info-list">
+                    {{#each shop_by_brand}}
+                        <li>
+                            <a href="{{url}}">{{name}}</a>
+                        </li>
+                    {{/each}}
+                    <li><a href="{{urls.brands}}">{{lang 'common.view_all'}}</a></li>
+                </ul>
+            </article>
+           
+            
+            {{/and}}
+
+            <article class="footer-info-col" data-section-type="newsletterSubscription">
+                {{#if settings.show_newsletter_box}}
+                    {{> components/common/subscription-form}}
+                {{/if}}
+                {{> components/common/payment-icons}}
+                    {{{region name="footer-icons--global"}}}
+            </article>
+        </section>
+        {{{region name="region_below_footer_info--global"}}}
+        
+            <div class="footer-copyright">
+                <p class="powered-by">        {{#if theme_settings.show_copyright_footer}}
+           
+                <span>&copy; {{moment format="YYYY"}} {{settings.store_name}}. </span>
+
+        {{/if}} {{#if theme_settings.show_powered_by}} {{lang 'footer.powered_by'}} <a href="https://www.bigcommerce.com?utm_source=merchant&amp;utm_medium=poweredbyBC" target="_blank" rel="nofollow">BigCommerce.</a>{{/if}} {{#if theme_settings.show_designed_by}} Designed by <a href="https://sumnima.studio/" target="_blank" rel="nofollow">Sumnima.studio </a> {{/if}}
+
+    </p>
+            </div>
+
+
+    </div>
+    {{{region name="ssl_site_seal--global"}}}
+</footer>

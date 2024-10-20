@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html class="no-js {{#if theme_settings.show_wai }}wai{{/if}}" lang="{{ locale_name }}">
+    <head>
+        <title>{{ head.title }}</title>
+        {{{ resourceHints }}}
+        {{{ head.meta_tags }}}
+        {{{ head.config }}}
+        {{#block "head"}} {{/block}}
+
+        <link href="{{ head.favicon }}" rel="shortcut icon">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script>
+            {{!-- Change document class from no-js to js so we can detect this in css --}}
+            document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+        </script>
+
+        {{> components/common/polyfill-script }}
+        <script>window.consentManagerTranslations = `{{{langJson 'consent_manager'}}}`;</script>
+
+        {{!-- Load Lazysizes script ASAP so images will appear --}}
+        <script>
+            {{!-- Only load visible elements until the onload event fires, after which preload nearby elements. --}}
+            window.lazySizesConfig = window.lazySizesConfig || {};
+            window.lazySizesConfig.loadMode = 1;
+        </script>
+        <script async src="{{cdn 'assets/dist/theme-bundle.head_async.js' resourceHint='preload' as='script'}}"></script>
+        
+        {{getFontsCollection font-display='block'}}
+        
+        <script async src="{{cdn 'assets/dist/theme-bundle.font.js' resourceHint='preload' as='script'}}"></script>
+
+        {{{stylesheet '/assets/css/theme.css'}}}
+
+        {{{head.scripts}}}
+
+        {{~inject 'zoomSize' theme_settings.zoom_size}}
+        {{~inject 'productSize' theme_settings.product_size}}
+        {{~inject 'genericError' (lang 'common.generic_error')}}
+        {{~inject 'urls' urls}}
+        {{~inject 'secureBaseUrl' settings.secure_base_url}}
+        {{~inject 'cartId' cart_id}}
+        {{~inject 'template' template}}
+        {{~inject 'validationDictionaryJSON' (langJson 'validation_messages')}}
+        {{~inject 'validationFallbackDictionaryJSON' (langJson 'validation_fallback_messages')}}
+        {{~inject 'validationDefaultDictionaryJSON' (langJson 'validation_default_messages')}}
+        {{~inject 'carouselArrowAndDotAriaLabel' (lang 'carousel.arrow_and_dot_aria_label')}}
+        {{~inject 'carouselActiveDotAriaLabel' (lang 'carousel.active_dot_aria_label')}}
+        {{~inject 'carouselContentAnnounceMessage' (lang 'carousel.content_announce_message')}}
+    </head>
+    <body class="{{#if theme_settings.image_background }}image-background{{/if}} {{page_type}} {{theme_settings.theme_layout}} 
+     {{#if theme_settings.enable_animation }}{{theme_settings.animation_style}}-active{{/if}} {{theme_settings.navigation_type}} {{#if theme_settings.enable_loading_logo}}logoLoad{{/if}} {{#if theme_settings.enable_loading_logo}}logoOpacity{{/if}} {{#if theme_settings.different_image_sizes }}product-baseLine{{/if}}">  
+             <svg data-src="{{cdn 'img/icon-sprite.svg'}}" class="icons-svg-sprite"></svg>
+
+             {{#if theme_settings.enable_loading_logo}} <div class="logo-loading"> {{> components/common/store-logo}} </div> {{/if}}
+
+        {{#if theme_settings.enable_animation }}  <main class="main-{{theme_settings.animation_style}}">{{/if}}
+            <section class="main-layout {{#if theme_settings.enable_favorite }}enable-favorite{{/if}} {{#if theme_settings.enable_search_feature }}enable-search-feature{{/if}} {{#if theme_settings.enable_theme_switch }}enable-theme-switch{{/if}} {{#if theme_settings.enable_grid_numbers }}enable-grid--numbers{{/if}} {{theme_settings.theme_layout}} {{#if theme_settings.mobile_single }}mobile-single{{/if}} {{#if theme_settings.enable_sidebar_filter }}sidebar-verify{{/if}} {{#if theme_settings.enable_icon_layout }}icon-layout{{/if}} "> 
+            {{> components/common/header }}
+            {{> components/common/body }}
+            {{> components/common/footer }}
+            </section>
+             {{#if theme_settings.enable_animation }}  </main> {{/if}}
+
+            <script>window.__webpack_public_path__ = "{{cdn 'assets/dist/'}}";</script>
+            <script>
+                {{!-- Exported in app.js --}}
+                function onThemeBundleMain() {
+                    window.stencilBootstrap("{{page_type}}", {{jsContext}}).load();
+                                    function browserSupportsFormData() {
+                    return typeof FormData !== 'undefined' 
+                        && !!FormData.prototype.keys;
+                }
+                function loadFormDataPolyfillScript(src) {
+                    var formDataPolyfillScript = document.createElement('script');
+                    formDataPolyfillScript.src = src;
+                    formDataPolyfillScript.onerror = function () {
+                        console.error('Failed to load formData polyfill script ' + src);
+                    };
+                    document.body.appendChild(formDataPolyfillScript);
+                }
+
+                if (!browserSupportsFormData()) {
+                    loadFormDataPolyfillScript('{{cdn 'assets/dist/theme-bundle.polyfill_form_data.js'}}');
+                }
+                }
+            </script>
+            <script async defer src="{{cdn 'assets/dist/theme-bundle.main.js' resourceHint='preload' as='script'}}" onload="onThemeBundleMain()"></script>
+
+            {{{footer.scripts}}} 
+
+    {{#if theme_settings.image_background }}<style>.image-background.box{background: url(/images/stencil/original/image-manager/{{theme_settings.box_background_image}}) repeat;}</style>{{/if}}  
+    </body>
+</html>
