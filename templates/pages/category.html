@@ -35,9 +35,7 @@ category:
     <h1 class="page-heading">{{category.name}}</h1>
     {{{region name="category_below_header"}}}
 {{/unless}}
-<div class="description-content">
-    {{{category.description}}}
-</div>
+
 </div>
 </div>
 
@@ -55,6 +53,9 @@ category:
 
     <main class="page-content" id="product-listing-container">
         {{> components/category/product-listing}}
+        <div class="description-content">
+            {{{category.description}}}
+        </div>
         {{{region name="category_below_content"}}}
          {{{region name="region_below_category--global"}}}
     </main>
