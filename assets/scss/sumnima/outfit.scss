@@ -2961,10 +2961,10 @@ body.brand {
 
       .price.price--withoutTax {
         display: inline-block;
-        font-size: $fontSize-root + 1px;
+        font-size: $h4-font-size - 6px;
 
         @include breakpoint("medium") {
-          font-size: $fontSize-root + 2px;
+          font-size: $h4-font-size;
         }
 
       }
