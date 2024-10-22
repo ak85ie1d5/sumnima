@@ -16,12 +16,12 @@
         {{#unless theme_settings.hide_content_navigation}}
             {{#each pages}}
                  <li class="navPages-item navPages-item-page">
-                     <a class="navPages-action{{#if name '==' ../page.title}} activePage{{/if}}"
-                        href="{{url}}"
-                        aria-label="{{name}}"
-                     >
-                         {{name}}
-                     </a>
+                     {{#if ../theme_settings.navigation_design '===' 'simple'}}
+                         {{> components/common/navigation-list}}
+                     {{/if}}
+                     {{#if ../theme_settings.navigation_design '===' 'alternate'}}
+                         {{> components/common/navigation-list-alternate}}
+                     {{/if}}
                  </li>
              {{/each}}
         {{/unless}}

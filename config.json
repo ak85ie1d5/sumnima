@@ -394,7 +394,7 @@
         "spinner-borderColor-light": "#ffffff",
         "review-bg": "#FFFFFF",
         "show_wai": true,
-        "hide_content_navigation": true,
+        "hide_content_navigation": false,
         "low_stock_label": "Almost Gone!",
         "carousel_video_poster": "posternew.png",
         "box_background_image": "background.png",
